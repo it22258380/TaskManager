@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 
 }
 
@@ -36,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+        dataBinding=true
+    }
 }
 
 dependencies {
@@ -57,9 +62,15 @@ dependencies {
 
 
     // Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.7")
-    androidTestImplementation("androidx.navigation:navigation-testing:2.7.7")
+    val navVersion = "2.7.3"
+    //noinspection GradleDependency
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    //noinspection GradleDependency
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    val lifecycle_version = "2.7.0"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
 
 }
