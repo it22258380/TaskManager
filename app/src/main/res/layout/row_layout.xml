@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="taskEntry"
+            type="com.example.taskmanager.database.TaskEntry" />
 
     </data>
 
@@ -32,7 +35,8 @@
             app:layout_constraintHorizontal_bias="0.079"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            tools:text="Title"
+            android:text="@{taskEntry.title}"/>
 
         <TextView
             android:id="@+id/priority"
@@ -44,7 +48,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskTitle"
-            tools:text="High" />
+            tools:text="High"
+            app:setPriority="@{taskEntry.priority}"/>
 
         <TextView
             android:id="@+id/taskTimestamp"
@@ -59,7 +64,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/priority"
             app:layout_constraintVertical_bias="0.0"
-            tools:text="timestamp" />
+            tools:text="timestamp"
+            app:setTimestamp="@{taskEntry.timestamp}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
     </layout>
