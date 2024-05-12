@@ -20,7 +20,7 @@ class TaskFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding=FragmentTaskBinding.inflate(inflater)
         binding.lifecycleOwner=this
         binding.viewModel=viewModel

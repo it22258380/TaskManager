@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -11,30 +10,52 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.update.updateFragment">
+        tools:context=".ui.update.updateFragment"
+        android:background="@drawable/bg2">
 
-        <!-- TODO: Update blank fragment layout -->
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-82dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Task"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.166"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.258" />
 
         <EditText
             android:id="@+id/update_editTask"
-            android:layout_width="208dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="16dp"
-            android:ems="10"
+            android:layout_width="388dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="52dp"
             android:hint="Enter task"
             android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.304"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Spinner
+            android:id="@+id/update_spinner"
+            android:layout_width="386dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="28dp"
+            android:entries="@array/priorities"
+            android:spinnerMode="dropdown"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/update_editTask"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/btnUpdate"
@@ -48,18 +69,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/update_spinner"
             app:layout_constraintVertical_bias="0.0" />
-
-        <Spinner
-            android:id="@+id/update_spinner"
-            android:layout_width="214dp"
-            android:layout_height="69dp"
-            android:layout_marginTop="32dp"
-            android:entries="@array/priorities"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/update_editTask" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

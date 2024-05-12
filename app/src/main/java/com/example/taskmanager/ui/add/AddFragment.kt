@@ -42,10 +42,12 @@ class AddFragment : Fragment() {
                 val titleStr = editTask.text.toString()
                 val priority = spinner.selectedItemPosition
 
+
                 val taskEntry = TaskEntry(
                     0,
                     titleStr,
                     priority,
+
                     System.currentTimeMillis()
                 )
 

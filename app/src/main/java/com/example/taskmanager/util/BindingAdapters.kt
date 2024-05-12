@@ -11,6 +11,7 @@ fun setPriority(view: TextView,priority:Int){
         0->{
             view.text="High Priority"
             view.setTextColor(Color.RED)
+
         }
         1->{
         view.text="Medium Priority"

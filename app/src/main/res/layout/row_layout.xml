@@ -28,6 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <TextView
             android:id="@+id/taskTitle"
             android:layout_width="0dp"
@@ -42,6 +44,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title"
             android:text="@{taskEntry.title}"/>
+
+
 
         <TextView
             android:id="@+id/priority"

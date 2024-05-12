@@ -39,10 +39,12 @@ class updateFragment : Fragment() {
                 val task_str=updateEditTask.text
                 val priority=updateSpinner.selectedItemPosition
 
+
                 val taskEntry=TaskEntry(
                     args.taskEntry.id,
                     task_str.toString(),
                     priority,
+
                     args.taskEntry.timestamp
                 )
 
