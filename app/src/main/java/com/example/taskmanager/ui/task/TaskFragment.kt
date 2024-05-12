@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -29,9 +28,14 @@ class TaskFragment : Fragment() {
         adapter= TaskAdapter(TaskClickListener { taskEntry ->
             findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToUpdateFragment(taskEntry))
         })
-        viewModel.getAllTasks.observe(viewLifecycleOwner){
-            adapter.submitList(it)
+
+        //display and sorting task based on priority
+        viewModel.getAllTasks.observe(viewLifecycleOwner) { taskList ->
+
+            val sortedTaskList = taskList.sortedBy { it.priority }
+            adapter.submitList(sortedTaskList)
         }
+
         binding.apply {
             binding.recyclerView.adapter=adapter
             floatingActionButton2.setOnClickListener{
@@ -49,6 +53,7 @@ class TaskFragment : Fragment() {
                 return false
             }
 
+            //when swap task delete working
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                val position=viewHolder.absoluteAdapterPosition
                 val taskEntry=adapter.currentList[position]
