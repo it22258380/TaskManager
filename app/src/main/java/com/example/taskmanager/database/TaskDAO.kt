@@ -19,8 +19,6 @@ interface TaskDAO {
     @Update
     suspend fun update(taskEntry: TaskEntry)
 
-    @Query("Delete FROM task_table")
-    suspend fun deleteAll()
 
     @Query("SELECT * FROM task_table ORDER BY timestamp DESC")
     fun getAllTasks(): LiveData<List<TaskEntry>>

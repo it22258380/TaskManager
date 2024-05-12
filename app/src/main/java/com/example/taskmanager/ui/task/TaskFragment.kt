@@ -1,113 +1,38 @@
 package com.example.taskmanager.ui.task
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
 import com.example.taskmanager.databinding.FragmentTaskBinding
 import com.example.taskmanager.viewmodel.TaskViewModel
-import com.google.android.material.snackbar.Snackbar
-
 class TaskFragment : Fragment() {
-    private val viewModel: TaskViewModel by viewModels()
+    private val viewModel:TaskViewModel by viewModels()
     private lateinit var adapter: TaskAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentTaskBinding.inflate(inflater)
+    ): View? {
+        val binding=FragmentTaskBinding.inflate(inflater)
+        binding.lifecycleOwner=this
+        binding.viewModel=viewModel
 
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
 
-        adapter = TaskAdapter(TaskClickListener { taskEntry ->
-            findNavController().navigate(
-                TaskFragmentDirections.actionTaskFragmentToUpdateFragment(
-                    taskEntry
-                )
-            )
+        adapter= TaskAdapter(TaskClickListener { taskEntry ->
+            findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToUpdateFragment(taskEntry))
         })
-        viewModel.getAllTasks.observe(viewLifecycleOwner) {
+        viewModel.getAllTasks.observe(viewLifecycleOwner){
             adapter.submitList(it)
         }
-
         binding.apply {
-            binding.recyclerView.adapter = adapter
-            floatingActionButton2.setOnClickListener {
+            binding.recyclerView.adapter=adapter
+            floatingActionButton2.setOnClickListener{
                 findNavController().navigate(R.id.action_taskFragment_to_addFragment)
             }
         }
-
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.bindingAdapterPosition
-                val taskEntry = adapter.currentList[position]
-                viewModel.delete(taskEntry)
-
-                Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_LONG).apply {
-                    setAction("Undo") {
-                        viewModel.insert(taskEntry)
-                    }
-                    show()
-                }
-            }
-
-        }).attachToRecyclerView(binding.recyclerView)
-
-        setHasOptionsMenu(true)
-
-
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.task_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_delete_all -> {
-                deleteAllItem()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
-
-    private fun deleteAllItem() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Delete All")
-            .setMessage("Are you sure?")
-            .setPositiveButton("Yes") { dialog, _ ->
-                viewModel.deleteAll()
-                dialog.dismiss()
-            }.setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }.create().show()
-
     }
 }

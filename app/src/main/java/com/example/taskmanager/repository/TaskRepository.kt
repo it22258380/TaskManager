@@ -11,9 +11,7 @@ class TaskRepository(val taskDAO: TaskDAO) {
 
     suspend fun deleteItem(taskEntry: TaskEntry)=taskDAO.delete(taskEntry)
 
-    suspend fun deleteAll(){
-        taskDAO.deleteAll()
-    }
+
 
     fun getAllTasks() : LiveData<List<TaskEntry>> = taskDAO.getAllTasks()
 
